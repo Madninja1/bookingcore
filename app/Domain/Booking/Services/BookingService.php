@@ -25,8 +25,12 @@ final class BookingService
         if (($data['participants_count'] ?? 0) > 10) {
             throw new DomainException('Participants must be ≤ 10.');
         }
+
         $guide = $this->guides->findActive((int)$data['guide_id']);
-        if (!$guide) throw new DomainException('Selected guide is not available.');
+        if (!$guide) {
+            throw new DomainException('Selected guide is not available.');
+        }
+
         if ($this->bookings->existsForGuideOnDate((int)$data['guide_id'], (string)$data['date'])) {
             throw new DomainException('Guide is already booked for this date.');
         }

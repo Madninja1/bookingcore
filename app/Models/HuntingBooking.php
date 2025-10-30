@@ -10,7 +10,6 @@ class HuntingBooking extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'tour_name',
         'hunter_name',
@@ -19,12 +18,10 @@ class HuntingBooking extends Model
         'participants_count',
     ];
 
-
     protected $casts = [
         'date'               => 'date:Y-m-d',
         'participants_count' => 'integer',
     ];
-
 
     public function guide(): BelongsTo
     {

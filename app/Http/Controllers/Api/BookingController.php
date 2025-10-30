@@ -9,12 +9,14 @@ use App\Http\Resources\HuntingBookingResource;
 
 class BookingController extends Controller
 {
-    public function store(StoreHuntingBookingRequest $request) {
+    public function store(StoreHuntingBookingRequest $request)
+    {
         try {
             $booking = app(CreateBooking::class)($request->validated());
+
             return response()->json(new HuntingBookingResource($booking), 201);
         } catch (\DomainException $e) {
-            return response()->json(['message'=>$e->getMessage()], 409);
+            return response()->json(['message' => $e->getMessage()], 409);
         }
     }
 }

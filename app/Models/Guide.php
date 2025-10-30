@@ -10,19 +10,16 @@ class Guide extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'name',
         'experience_years',
         'is_active',
     ];
 
-
     protected $casts = [
         'is_active'        => 'boolean',
         'experience_years' => 'integer',
     ];
-
 
     public function bookings(): HasMany
     {
