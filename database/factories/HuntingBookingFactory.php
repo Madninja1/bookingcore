@@ -15,7 +15,7 @@ class HuntingBookingFactory extends Factory
         return [
             'tour_name'          => $this->faker->sentence(3),
             'hunter_name'        => $this->faker->firstName(),
-            'guide_id'           => Guide::factory(),
+            'guide_id'           => null,
             'date'               => now()->addDays(3)->toDateString(),
             'participants_count' => $this->faker->numberBetween(1, 10),
         ];

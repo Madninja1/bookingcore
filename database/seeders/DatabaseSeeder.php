@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Guide;
+use App\Models\HuntingBooking;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $guides = Guide::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $guides->each(function (Guide $guide) {
+            $count = fake()->numberBetween(1, 3);
+            $offsets = collect(range(1, 60))->shuffle()->take($count);
+
+            foreach ($offsets as $d) {
+                HuntingBooking::factory()->create([
+                    'guide_id' => $guide->id,
+                    'date'     => now()->addDays($d)->toDateString(), // только дата
+                ]);
+            }
+        });
     }
 }
